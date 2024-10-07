@@ -1,1 +1,1 @@
-# tateti
+Mini proyecto para practicar factory functions y module pattern.
