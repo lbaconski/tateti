@@ -41,4 +41,33 @@ const gameboardController = (function () {
         }
         return gameboard.includes('') ? null : 'Empate'; 
     };
-    return {markSqr, emptyGameBoard}})();
+    return {markSqr, emptyGameBoard, checkWinner}})();
+
+
+    const gameController = (function () {
+        let currentPlayer;
+        const player1 = Player("Player 1", 'X');
+        const player2 = Player("Player 2", 'O');
+    
+        const startGame = () => {
+            currentPlayer = player1; 
+            gameboardController.emptyGameBoard();
+    
+        };
+    
+        const playTurn = (pos) => {
+            if (gameboardController.markSqr(currentPlayer.symbol, pos)) {
+                const winner = gameboardController.checkWinner();
+                if (winner) {
+                    console.log(winner === 'Tie' ? "It's a Tie!" : `${winner} wins!`);
+                } else {
+                    currentPlayer = currentPlayer === player1 ? player2 : player1; 
+                }
+            } else {
+                console.log("Error. Casilla ocupada.");
+            }
+        };
+    
+        return { startGame, playTurn };
+    })();
+    
