@@ -1,0 +1,9 @@
+td {
+    height: 3rem;
+    width: 3rem;
+    background-color: gainsboro;
+}
+
+td:hover {
+    background-color: cornflowerblue;
+}

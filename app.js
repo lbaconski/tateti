@@ -20,9 +20,9 @@ const Player = (name, symbol) => {
 //controlador de tablero
 const gameboardController = (function () {
     
-    const markSqr = (player, pos) => {
+    const markSqr = (playerSymbol, pos) => {
         if (gameboard[pos] === '') {
-            gameboard[pos] = player;
+            gameboard[pos] = playerSymbol;
             return true; 
         }
         return false;
@@ -59,7 +59,7 @@ const gameboardController = (function () {
             if (gameboardController.markSqr(currentPlayer.symbol, pos)) {
                 const winner = gameboardController.checkWinner();
                 if (winner) {
-                    console.log(winner === 'Tie' ? "It's a Tie!" : `${winner} wins!`);
+                    console.log(winner === 'Empate' ? "Empate!" : `Ganador: ${winner}`);
                 } else {
                     currentPlayer = currentPlayer === player1 ? player2 : player1; 
                 }
@@ -70,4 +70,16 @@ const gameboardController = (function () {
     
         return { startGame, playTurn };
     })();
-    
+
+  
+
+    const cells = document.querySelectorAll('td');
+
+    cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            const index = cell.getAttribute('data-index');
+            gameController.playTurn(index);
+        });
+    });
+
+    gameController.startGame();
