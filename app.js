@@ -12,7 +12,12 @@ const winningSets = [
     [2,4,6]
 ]
 
-//tablero vacio
+//Player factory
+const Player = (name, symbol) => {
+    return { name, symbol };
+};
+
+//controlador de tablero
 const gameboardController = (function () {
     
     const markSqr = (player, pos) => {
