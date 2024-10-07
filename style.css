@@ -18,7 +18,7 @@ body {
     border: solid #333 0.2rem;
     background-color: white;
     border-radius: 5px;
-    width: 60%;
+    width: 13.2rem;
     max-width: 300px;
 }
 
@@ -34,8 +34,8 @@ table {
 }
 
 td {
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 4rem;
     background-color: gainsboro;
     border: solid rgb(38, 22, 22) 0.1rem;
     text-align: center;
@@ -75,6 +75,7 @@ td:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 9.2rem;
 }
 
 #restart-button:hover {
