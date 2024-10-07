@@ -7,7 +7,7 @@ const winningSets = [
     [6,7,8],
     [0,3,6],
     [1,4,7],
-    [2,5,7],
+    [2,5,8],
     [0,4,8],
     [2,4,6]
 ]
@@ -16,6 +16,7 @@ const winningSets = [
 const Player = (name, symbol) => {
     return { name, symbol };
 };
+
 
 //==================================================================//
 //                           TABLERO
@@ -63,17 +64,18 @@ const gameboardController = (function () {
         cells[win.a].classList.add('winner')
         cells[win.b].classList.add('winner')
         cells[win.c].classList.add('winner')
-        document.getElementById('message-board').innerText(`We have a WINNER! Congratulations ${win.winner}.`);
+        document.getElementById('message-board').innerText = `We have a WINNER! Congratulations ${win.winner}.`;
       
     }
     const tie = function(){
         cells.forEach(cell => cell.classList.add('tie'))
-        document.getElementById('message-board').innerText(`It's a Tie!`);
+        document.getElementById('message-board').innerText = `It's a Tie!`;
     }
 
     const play = function(){
-        document.getElementById('message-board').innerText(`${gameController.currentPlayer()} turn.`);
+        document.getElementById('message-board').innerText = `${gameController.getCurrentPlayer().name} turn.`;
     }
+
             
 
 
@@ -89,9 +91,8 @@ const gameboardController = (function () {
         const player1 = Player("Player 1", 'X');
         const player2 = Player("Player 2", 'O');
     
-        const getCurrentPlayer = (){
-            return currentPlayer;
-        }
+        const getCurrentPlayer = ()=> currentPlayer;
+
         const startGame = () => {
             currentPlayer = player1; 
             gameboardController.emptyGameBoard();
@@ -101,7 +102,9 @@ const gameboardController = (function () {
                     const index = cell.getAttribute('data-index');
                     gameController.playTurn(index);
                 });
+                cell.innerText = ''
             });
+            view.play();
     
         };
     
@@ -138,6 +141,8 @@ const gameboardController = (function () {
     function app(){
 
         gameController.startGame();
+        //restart-button
+        document.getElementById('restart-button').addEventListener('click', gameController.startGame())
     
     }
 

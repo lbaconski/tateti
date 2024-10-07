@@ -45,11 +45,12 @@ background-color: rgb(54, 54, 54);
         pointer-events: none;
 }
 
-.message-board {
+.message-board {    
+
     border: solid black 0.2rem;
 }
 
-#reset-button {
+#restart-button{
     margin-top: 1rem; 
     padding: 0.5rem 1rem; 
-    background-color: rgb(38, 22, 22); }
+    background-color: rgb(147, 137, 137); }
