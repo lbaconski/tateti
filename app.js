@@ -103,7 +103,9 @@ const gameboardController = (function () {
                     gameController.playTurn(index);
                 });
                 cell.innerText = ''
+                cell.classList.remove('not-clickable', 'winner', 'tie');
             });
+            
             view.play();
     
         };
@@ -142,7 +144,7 @@ const gameboardController = (function () {
 
         gameController.startGame();
         //restart-button
-        document.getElementById('restart-button').addEventListener('click', gameController.startGame())
+        document.getElementById('restart-button').addEventListener('click', gameController.startGame)
     
     }
 

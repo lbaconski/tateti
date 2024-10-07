@@ -1,56 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#message-board {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+    padding: 0.5rem;
+    border: solid #333 0.2rem;
+    background-color: white;
+    border-radius: 5px;
+    width: 60%;
+    max-width: 300px;
+}
+
+.game-area {
+    padding: 1rem;
+    background-color: rgb(194, 193, 210);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    border-collapse: collapse;
+}
 
 td {
     height: 3rem;
     width: 3rem;
     background-color: gainsboro;
     border: solid rgb(38, 22, 22) 0.1rem;
-    margin: auto;   
     text-align: center;
-    font-size: 2rem; 
-    font-weight: bold; 
-    transition: background-color 0.3s ease; 
+    font-size: 2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
 
 td:hover {
     background-color: cornflowerblue;
-}
-
-#gameboard {
-    
+    transform: scale(1.05);
 }
 
 .winner {
-    background-color: rgb(14, 197, 90); 
+    background-color: rgb(14, 197, 90);
     color: white;
-    transition:  0.3s ease; 
+    transition: 0.3s ease;
 }
 
-.tie{
-background-color: rgb(54, 54, 54); 
-    color: rgb(31, 31, 31);
-    font-size: 2.5rem; 
-    transition: transform 0.3s ease; 
-    transform: scale(1.1); 
+.tie {
+    background-color: rgb(54, 54, 54);
+    color: white;
+    font-size: 2.5rem;
+    transform: scale(1.1);
 }
 
-.game-area {
-    padding: 1rem; 
-    background-color: rgb(194, 193, 210); 
-    border-radius: 10px; 
-
+.not-clickable {
+    pointer-events: none;
 }
 
-.not-clickable{
-        pointer-events: none;
+#restart-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgb(147, 137, 137);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.message-board {    
-
-    border: solid black 0.2rem;
+#restart-button:hover {
+    background-color: rgb(120, 110, 110);
+    transform: scale(1.05);
 }
-
-#restart-button{
-    margin-top: 1rem; 
-    padding: 0.5rem 1rem; 
-    background-color: rgb(147, 137, 137); }
