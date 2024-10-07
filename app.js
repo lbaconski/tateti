@@ -41,11 +41,10 @@ const gameboardController = (function () {
             if (gameboard[a] && gameboard[a] === gameboard[b] && gameboard[a] === gameboard[c]) {
                 //HAY GANADOR
                 gameController.endGame();
-                return {
-                    winner:gameboard[a], a, b, c}
+                return { winner:gameboard[a], a, b, c}
             }
         }
-        return gameboard.includes('') ? null : 'Empate'; 
+        return gameboard.includes('') ? null : 'Tie'; 
     };
 
     const getBoard = () => gameboard;
@@ -60,16 +59,25 @@ const gameboardController = (function () {
     const updateCell = function(pos){
         cells[pos].innerText = gameboard[pos];
     }
-    const winner = function(a,b,c){
-        cells[a].classList.add('winner')
-        cells[b].classList.add('winner')
-        cells[c].classList.add('winner')
+    const winner = function(win){
+        cells[win.a].classList.add('winner')
+        cells[win.b].classList.add('winner')
+        cells[win.c].classList.add('winner')
+        document.getElementById('message-board').innerText(`We have a WINNER! Congratulations ${win.winner}.`);
       
     }
     const tie = function(){
         cells.forEach(cell => cell.classList.add('tie'))
+        document.getElementById('message-board').innerText(`It's a Tie!`);
     }
-    return {updateCell, winner, tie}
+
+    const play = function(){
+        document.getElementById('message-board').innerText(`${gameController.currentPlayer()} turn.`);
+    }
+            
+
+
+    return {updateCell, winner, tie, play}
   })();
 
 //==================================================================//
@@ -81,6 +89,9 @@ const gameboardController = (function () {
         const player1 = Player("Player 1", 'X');
         const player2 = Player("Player 2", 'O');
     
+        const getCurrentPlayer = (){
+            return currentPlayer;
+        }
         const startGame = () => {
             currentPlayer = player1; 
             gameboardController.emptyGameBoard();
@@ -99,12 +110,13 @@ const gameboardController = (function () {
                 view.updateCell(pos);
                 const win = gameboardController.checkWin();
                 if (win) {
-                    win === 'Empate' ? view.tie(): view.winner(win.a, win.b, win.c);
+                    win === 'Tie' ? view.tie(): view.winner(win);
                 } else {
                     currentPlayer = currentPlayer === player1 ? player2 : player1; 
+                    view.play();
                 }
             } else {
-                console.log("Error. Casilla ocupada.");
+                console.log("Error. Already marked cell");
             }
         };
 
@@ -112,7 +124,7 @@ const gameboardController = (function () {
             const cells = document.querySelectorAll('td');
             cells.forEach(cell => cell.classList.add('not-clickable'));
         }
-        return { startGame, playTurn, endGame };
+        return { startGame, playTurn, endGame, getCurrentPlayer };
     })();
 
 
