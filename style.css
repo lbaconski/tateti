@@ -1,9 +1,48 @@
+
 td {
     height: 3rem;
     width: 3rem;
     background-color: gainsboro;
+    border: solid rgb(38, 22, 22) 0.1rem;
+    margin: auto;   
+    text-align: center;
+    font-size: 2rem; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease; 
 }
+
 
 td:hover {
     background-color: cornflowerblue;
 }
+
+#gameboard {
+    
+}
+
+.winner {
+    background-color: rgb(14, 197, 90); 
+    color: white;
+    font-size: 2.5rem; 
+    transition: transform 0.3s ease; 
+    transform: scale(1.1); }
+
+.tie{
+background-color: rgb(54, 54, 54); 
+    color: rgb(31, 31, 31);
+    font-size: 2.5rem; 
+    transition: transform 0.3s ease; 
+    transform: scale(1.1); 
+}
+
+.game-area {
+    padding: 1rem; 
+    background-color: rgb(194, 193, 210); 
+    border-radius: 10px; 
+
+}
+
+.reset-button {
+    margin-top: 1rem; 
+    padding: 0.5rem 1rem; 
+    background-color: rgb(38, 22, 22); }

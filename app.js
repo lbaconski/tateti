@@ -17,7 +17,10 @@ const Player = (name, symbol) => {
     return { name, symbol };
 };
 
-//controlador de tablero
+//==================================================================//
+//                           TABLERO
+//==================================================================//
+
 const gameboardController = (function () {
     
     const markSqr = (playerSymbol, pos) => {
@@ -41,8 +44,31 @@ const gameboardController = (function () {
         }
         return gameboard.includes('') ? null : 'Empate'; 
     };
-    return {markSqr, emptyGameBoard, checkWinner}})();
 
+    const getBoard = () => gameboard;
+    return {markSqr, emptyGameBoard, checkWinner, getBoard}})();
+
+
+//==================================================================//
+//                          VISTA
+//==================================================================//
+  const view = (function(){
+    const cells = document.querySelectorAll('td');
+    const updateCell = function(pos){
+        cells[pos].innerText = gameboard[pos];
+    }
+    const winner = function(cell){
+        cells[cell].classList.add('winner')
+    }
+    const tie = function(){
+        cells.forEach(cell => cell.classList.add('tie'))
+    }
+    return {updateCell, winner, tie}
+  })();
+
+//==================================================================//
+//                          CONTROLADOR DE JUEGO
+//==================================================================//
 
     const gameController = (function () {
         let currentPlayer;
@@ -57,9 +83,10 @@ const gameboardController = (function () {
     
         const playTurn = (pos) => {
             if (gameboardController.markSqr(currentPlayer.symbol, pos)) {
+                view.updateCell(pos);
                 const winner = gameboardController.checkWinner();
                 if (winner) {
-                    console.log(winner === 'Empate' ? "Empate!" : `Ganador: ${winner}`);
+                    winner === 'Empate' ? view.tie(): view.winner();
                 } else {
                     currentPlayer = currentPlayer === player1 ? player2 : player1; 
                 }
@@ -67,19 +94,32 @@ const gameboardController = (function () {
                 console.log("Error. Casilla ocupada.");
             }
         };
+
     
         return { startGame, playTurn };
     })();
 
-  
 
-    const cells = document.querySelectorAll('td');
 
-    cells.forEach(cell => {
-        cell.addEventListener('click', () => {
-            const index = cell.getAttribute('data-index');
-            gameController.playTurn(index);
+
+
+
+//==================================================================//
+//                          APP
+//==================================================================//
+    function app(){
+
+        const cells = document.querySelectorAll('td');
+
+        gameController.startGame();
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const index = cell.getAttribute('data-index');
+                gameController.playTurn(index);
+            });
         });
-    });
+    
+    }
 
-    gameController.startGame();
+app();
