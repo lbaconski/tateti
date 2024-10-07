@@ -1,4 +1,4 @@
-let gameboard = Array(10).fill('')
+let gameboard = Array(9).fill('')
 
 //posibles combinaciones ganadoras
 const winningSets = [
@@ -15,10 +15,25 @@ const winningSets = [
 //tablero vacio
 const gameboardController = (function () {
     
-    const markSqr = (player, pos) => gameboard[pos] = player;
-    const emptyGameBoard = function(){
-        gameboard = ['','','','','','','','','']
-        return gameboard;
+    const markSqr = (player, pos) => {
+        if (gameboard[pos] === '') {
+            gameboard[pos] = player;
+            return true; 
+        }
+        return false;
     };
 
-    return {markSqr, emptyGameBoard}})
+    const emptyGameBoard = function(){
+        gameboard = Array(9).fill('')
+        return gameboard;
+    };
+    const checkWinner = () => {
+        for (let set of winningSets) {
+            const [a, b, c] = set;
+            if (gameboard[a] && gameboard[a] === gameboard[b] && gameboard[a] === gameboard[c]) {
+                return gameboard[a]; 
+            }
+        }
+        return gameboard.includes('') ? null : 'Empate'; 
+    };
+    return {markSqr, emptyGameBoard}})();
